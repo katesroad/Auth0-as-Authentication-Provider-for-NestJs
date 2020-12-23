@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import { Button, Alert } from "reactstrap";
-import Highlight from "../components/Highlight";
 import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
+import React, { useState } from "react";
+import { Alert, Button } from "reactstrap";
 import config from "../auth_config.json";
+import Highlight from "../components/Highlight";
 import Loading from "../components/Loading";
 
 const { apiOrigin = "http://localhost:5000", audience } = config;
@@ -60,6 +60,7 @@ export const ExternalApiComponent = () => {
 			const token = await getAccessTokenSilently();
 
 			const response = await fetch(`${apiOrigin}/external`, {
+				mode: 'cors',
 				headers: {
 					Authorization: `Bearer ${token}`,
 				},
